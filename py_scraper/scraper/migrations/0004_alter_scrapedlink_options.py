@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('scraper', '0003_scrapedpage_status'),
+        ("scraper", "0003_scrapedpage_status"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='scrapedlink',
-            options={'ordering': ['id']},
+            name="scrapedlink",
+            options={"ordering": ["id"]},
         ),
     ]

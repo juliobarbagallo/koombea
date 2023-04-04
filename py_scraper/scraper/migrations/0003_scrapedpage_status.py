@@ -4,15 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('scraper', '0002_alter_scrapedpage_url'),
+        ("scraper", "0002_alter_scrapedpage_url"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='scrapedpage',
-            name='status',
-            field=models.CharField(choices=[('in_progress', 'In Progress'), ('completed', 'Completed')], default='in_progress', max_length=20),
+            model_name="scrapedpage",
+            name="status",
+            field=models.CharField(
+                choices=[("in_progress", "In Progress"), ("completed", "Completed")],
+                default="in_progress",
+                max_length=20,
+            ),
         ),
     ]

@@ -9,6 +9,9 @@ beautifulsoup4 = "*"
 django-q = "*"
 redis = "*"
 celery = "*"
+black = "*"
+flake8 = "*"
+isort = "*"
 
 [dev-packages]
 
