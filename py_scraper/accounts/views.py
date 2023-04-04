@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from scraper.forms import ScrapeForm
 from scraper.tasks import scrap
 from scraper.views import the_scraper
-
+from django.core.paginator import Paginator
 
 def register(request):
     if request.method == 'POST':
@@ -40,9 +40,14 @@ def dashboard(request):
             return redirect('dashboard')
     else:
         form = ScrapeForm()
+    pages_paginator = Paginator(scraped_pages, 10)
+    page_num = request.GET.get('page', 1)
+    page = pages_paginator.get_page(page_num)
     context = {
         'user': user,
         'form': form,
-        'scraped_pages': scraped_pages
+        'scraped_pages': scraped_pages,
+        'count' : pages_paginator.count,
+        'page' : page
     }
     return render(request, 'dashboard.html', context)

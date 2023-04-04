@@ -9,6 +9,8 @@
     </form>
     <hr>
     <h2>Previously scraped pages</h2>
+    <h2>Number of scraped web pages: {{ count }}</h2>
+    <h2>Page number: {{ page.number }}</h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-          {% for scraped_page in scraped_pages %}
+          {% for scraped_page in page.object_list %}
           <tr>
             <td><a href="{% url 'scraped_page_details' scraped_page.pk %}?page=1">{{ scraped_page.name|default:scraped_page.url }}</a></td>
 
@@ -32,5 +34,13 @@
           {% endfor %}
         </tbody>
     </table>
+    <div>
+      {% if page.has_previous %}
+          <a href="{% url 'dashboard' %}?page={{ page.previous_page_number }}">Previos page</a>
+      {% endif %}
+      {% if page.has_next %}
+      <a href="{% url 'dashboard' %}?page={{ page.next_page_number }}">Next page</a>
+      {% endif %}
+  </div>
 </div>
 {% endblock %}
