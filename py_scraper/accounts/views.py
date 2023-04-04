@@ -36,7 +36,6 @@ def dashboard(request):
         form = ScrapeForm(request.POST)
         if form.is_valid():
             url = form.cleaned_data['url']
-            # scrap.delay(url)
             the_scraper(url, user.id)
             return redirect('dashboard')
     else:

@@ -20,6 +20,8 @@ def scrap(url, user_id):
             name = link.string if link.string else url
             if url:
                 ScrapedLink.objects.create(page=scraped_page, url=url, name=name)
-
+        
+        scraped_page.status = 'completed'
+        scraped_page.save()
     except Exception as e:
         print(f"An error occurred while scraping {url}: {e}")

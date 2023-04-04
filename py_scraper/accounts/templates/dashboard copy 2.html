@@ -22,13 +22,7 @@
           {% for scraped_page in scraped_pages %}
           <tr>
               <td>{{ scraped_page.name|default:scraped_page.url }}</td>
-              <td>
-                {% if scraped_page.status == 'completed' %}
-                    {{ scraped_page.link_count }}
-                {% else %}
-                    {{ scraped_page.get_status_display }}
-                {% endif %}
-            </td>
+              <td>{{ scraped_page.link_count|default_if_none:"in progress" }}</td>
           </tr>
           {% endfor %}
         </tbody>

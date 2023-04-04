@@ -4,10 +4,15 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class ScrapedPage(models.Model):
+    STATUS_CHOICES = {
+        'in_progress': 'In Progress',
+        'completed': 'Completed',
+    }
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='scraped_pages')
     url = models.URLField(unique=False)
     name = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=list(STATUS_CHOICES.items()), default='in_progress')
 
     def __str__(self):
         return self.name or self.url
