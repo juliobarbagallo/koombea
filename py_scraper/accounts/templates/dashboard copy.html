@@ -1,8 +1,0 @@
-
-
-{% block content %}
-<a href="{% url 'logout' %}">Logout</a>
-  <h1>Welcome to your dashboard, {{ user.username }}</h1>
-  <p>Email: {{ user.email }}</p>
-  <p>Account created: {{ user.date_joined }}</p>
-{% endblock %}

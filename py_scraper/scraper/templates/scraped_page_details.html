@@ -1,0 +1,36 @@
+
+
+{% block content %}
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+<div class="container">
+    <h1>Details for "{{ scraped_page.name|default:scraped_page.url }}"</h1>
+    <h2>Number of links: {{ count }}</h2>
+    <h2>Page number: {{ page.number }}</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for link in page.object_list %}
+          <tr>
+              <td>{{ link.name|default:link.url }}</td>
+              <td>{{ link.url }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        {% if page.has_previous %}
+            <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.previous_page_number }}">Previos page</a>
+        {% endif %}
+        {% if page.has_next %}
+        <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.next_page_number }}">Next page</a>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

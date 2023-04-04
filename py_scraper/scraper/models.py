@@ -26,5 +26,8 @@ class ScrapedLink(models.Model):
     url = models.URLField()
     name = models.CharField(max_length=255, blank=True)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.name or self.url
