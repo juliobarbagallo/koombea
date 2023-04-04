@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+beautifulsoup4 = "*"
+django-q = "*"
+redis = "*"
+celery = "*"
 
 [dev-packages]
 

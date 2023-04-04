@@ -84,6 +84,20 @@ DATABASES = {
 }
 
 
+Q_CLUSTER = {
+    'name': 'py_scraper',
+    'workers': 4,
+    'redis': {
+        'host': 'redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com',
+        'port': 14512,
+        'password': 'zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN',
+        'db': 0,
+    },
+}
+
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -127,3 +141,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGIN_URL = 'login'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
