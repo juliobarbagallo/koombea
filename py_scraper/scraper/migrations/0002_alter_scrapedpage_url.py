@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('scraper', '0001_initial'),
+        ("scraper", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='scrapedpage',
-            name='url',
+            model_name="scrapedpage",
+            name="url",
             field=models.URLField(),
         ),
     ]
