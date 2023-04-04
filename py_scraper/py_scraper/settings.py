@@ -84,16 +84,13 @@ DATABASES = {
 }
 
 
-Q_CLUSTER = {
-    'name': 'py_scraper',
-    'workers': 4,
-    'redis': {
-        'host': 'redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com',
-        'port': 14512,
-        'password': 'zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN',
-        'db': 0,
-    },
-}
+# CELERY_BROKER_URL = 'redis://redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512/0'
+CELERY_BROKER_URL = 'redis://:zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN@redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512'
+CELERY_RESULT_BACKEND = 'redis://:zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN@redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
 
 
 
