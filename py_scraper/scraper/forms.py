@@ -1,4 +1,4 @@
 from django import forms
 
-class ScrapedPageForm(forms.Form):
+class ScrapeForm(forms.Form):
     url = forms.URLField(label='Web URL')

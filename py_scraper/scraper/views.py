@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .forms import ScrapeForm
+from scraper.tasks import scrap
 
-# Create your views here.
+def the_scraper(url, user_id):
+    scrap.delay(url, user_id)

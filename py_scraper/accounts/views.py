@@ -4,8 +4,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView
 from accounts.forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-from scraper.forms import ScrapedPageForm
-from scraper.tasks import add
+from scraper.forms import ScrapeForm
+from scraper.tasks import scrap
+from scraper.views import the_scraper
 
 
 def register(request):
@@ -32,13 +33,14 @@ def dashboard(request):
     user = request.user
     scraped_pages = user.scraped_pages.all()
     if request.method == 'POST':
-        form = ScrapedPageForm(request.POST)
+        form = ScrapeForm(request.POST)
         if form.is_valid():
             url = form.cleaned_data['url']
-            add.delay(url)
+            # scrap.delay(url)
+            the_scraper(url, user.id)
             return redirect('dashboard')
     else:
-        form = ScrapedPageForm()
+        form = ScrapeForm()
     context = {
         'user': user,
         'form': form,
