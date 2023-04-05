@@ -1,6 +1,11 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 {% block content %}
 <div class="container">
     <h1>Welcome, {{ user.username }}</h1>
+    <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
     <h2>Wanna scrap!?</h2>
     <form method="post">
         {% csrf_token %}
@@ -8,9 +13,9 @@
         <button type="submit" class="btn btn-primary">Scrap it</button>
     </form>
     <hr>
-    <h2>Previously scraped pages</h2>
-    <h2>Number of scraped web pages: {{ count }}</h2>
-    <h2>Page number: {{ page.number }}</h2>
+    <h2>Previously scraped pages:</h2>
+    <p>Number of scraped web pages: {{ count }}</p>
+    <p>Page number: {{ page.number }}</p>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,28 +24,28 @@
             </tr>
         </thead>
         <tbody>
-          {% for scraped_page in page.object_list %}
-          <tr>
-            <td><a href="{% url 'scraped_page_details' scraped_page.pk %}?page=1">{{ scraped_page.name|default:scraped_page.url }}</a></td>
+            {% for scraped_page in page.object_list %}
+            <tr>
+                <td><a href="{% url 'scraped_page_details' scraped_page.pk %}?page=1">{{ scraped_page.name|default:scraped_page.url }}</a></td>
 
-              <td>
-                {% if scraped_page.status == 'completed' %}
+                <td>
+                    {% if scraped_page.status == 'completed' %}
                     {{ scraped_page.link_count }}
-                {% else %}
+                    {% else %}
                     {{ scraped_page.get_status_display }}
-                {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div>
-      {% if page.has_previous %}
-          <a href="{% url 'dashboard' %}?page={{ page.previous_page_number }}">Previos page</a>
-      {% endif %}
-      {% if page.has_next %}
-      <a href="{% url 'dashboard' %}?page={{ page.next_page_number }}">Next page</a>
-      {% endif %}
-  </div>
+        {% if page.has_previous %}
+        <a href="{% url 'dashboard' %}?page={{ page.previous_page_number }}" class="btn btn-primary">Previos page</a>
+        {% endif %}
+        {% if page.has_next %}
+        <a href="{% url 'dashboard' %}?page={{ page.next_page_number }}" class="btn btn-primary">Next page</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

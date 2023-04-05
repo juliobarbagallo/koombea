@@ -1,12 +1,14 @@
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 {% block content %}
-<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+<a href="{% url 'dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
 
-<div class="container">
-    <h1>Details for "{{ scraped_page.name|default:scraped_page.url }}"</h1>
-    <h2>Number of links: {{ count }}</h2>
-    <h2>Page number: {{ page.number }}</h2>
+<div class="container mt-4">
+    <h1>"{{ scraped_page.name|default:scraped_page.url }}"</h1>
+    <p>Number of links: {{ count }}</p>
+    <p>Page number: {{ page.number }}</p>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,10 +27,10 @@
     </table>
     <div>
         {% if page.has_previous %}
-            <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.previous_page_number }}">Previos page</a>
+            <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.previous_page_number }}" class="btn btn-primary">Previos page</a>
         {% endif %}
         {% if page.has_next %}
-        <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.next_page_number }}">Next page</a>
+            <a href="{% url 'scraped_page_details' scraped_page_pk %}?page={{ page.next_page_number }}" class="btn btn-primary">Next page</a>
         {% endif %}
     </div>
 
