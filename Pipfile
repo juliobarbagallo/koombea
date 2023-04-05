@@ -12,6 +12,7 @@ celery = "*"
 black = "*"
 flake8 = "*"
 isort = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
