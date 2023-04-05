@@ -26,23 +26,56 @@ or directly edit the following line at settings.py file:
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
-Clone the repository to your local machine.
+Create a new directory for the project.
+Go to your new directory.
+Clone the repository.
 Create a virtual environment and activate it.
 Install the dependencies using pipenv.
-Create a new Django project and configure the database settings in the settings.py file.
-Apply the migrations to create the necessary database tables.
-Start the Django development server.
-Access the web application in your web browser.
+Create a .env file.
+Edit the .env file.
+  
+Open a new terminal.
+Got to the project direcotry.
+Run Celery.
+  
+Go to the project directory.
+Start the dev server.
 
 ```bash
+mkdir koombea
 git clone git@github.com:juliobarbagallo/koombea.git
-cd py_scraper
 pipenv shell
 pipenv install
-python manage.py migrate
-python manage.py runserver
+cd koombea
+touch .env
+```
+### In the .env file you must to add the env variables for celery:
+CELERY_BROKER_URL and CELERY_RESULT_BACKEND as mentioned above.
+/your/path/koombea
+├── .env
+├── .git
+├── .gitignore
+├── .pre-commit-config.yaml
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+└── py_scraper
+    └── (contents of py_scraper directory)
+
+
+## Open a new terminal
+```bash
+cd koombea/py_scraper
+celery -A py_scraper worker -l info -E
 ```
 
+## Go back to the original terminal
+```bash
+python manage.py runserver
+```
+  
+## Open the browser and navigate to: http://127.0.0.1:8000/ or http://127.0.0.1:8000/accounts/login/
+  
 Usage
 Register or login to access the web scraping features.
 Click on "Add Page" to add a web page for scraping by providing the URL of the page.
