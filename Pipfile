@@ -13,6 +13,7 @@ black = "*"
 flake8 = "*"
 isort = "*"
 python-dotenv = "*"
+pre-commit = "*"
 
 [dev-packages]
 
