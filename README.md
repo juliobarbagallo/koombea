@@ -51,16 +51,7 @@ touch .env
 ```
 ### In the .env file you must to add the env variables for celery:
 CELERY_BROKER_URL and CELERY_RESULT_BACKEND as mentioned above.
-/your/path/koombea
-├── .env
-├── .git
-├── .gitignore
-├── .pre-commit-config.yaml
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-└── py_scraper
-    └── (contents of py_scraper directory)
+
 
 
 ## Open a new terminal
