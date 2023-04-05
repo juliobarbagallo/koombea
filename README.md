@@ -79,3 +79,11 @@ Once the page is added, the scraping process will start asynchronously in the ba
 Users can view the list of all the pages they have scraped on the "Pages" page, including the number of links found on each page.
   
 Users can click on the page name to view the details of the links found on that page, including the URLs and names of the links.
+  
+  
+  
+## TODO:
+  - Dockerize
+  - Implement swagger
+  - Logger
+  - Improve frront-end, add refresh after new url is added.
