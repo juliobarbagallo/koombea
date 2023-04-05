@@ -1,41 +1,71 @@
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import TestCase
+from django.urls import reverse_lazy
 
 from scraper.models import ScrapedLink, ScrapedPage
 
 
+from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.test import TestCase
+
+from scraper.models import ScrapedLink, ScrapedPage
+
+SCRAPED_PAGE_DATA = {
+    "user": {
+        "username": "koombeauser",
+        "password": "testpassword"
+    },
+    "url": "https://koombea.com",
+    "name": "You App Development Partner"
+}
+
+SCRAPED_LINK_DATA = {
+    "page": {
+        "url": "https://koombea.com",
+        "name": "You App Development Partner"
+    },
+    "url": "https://koombea.com/link1",
+    "name": "Link 1"
+}
 class ScraperTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            username="testuser", password="testpassword"
+            **SCRAPED_PAGE_DATA["user"]
         )
 
         self.scraped_page = ScrapedPage.objects.create(
             user=self.user,
-            url="http://example.com",
-            name="Example",
+            url=SCRAPED_PAGE_DATA["url"],
+            name=SCRAPED_PAGE_DATA["name"],
             status="completed",
         )
 
         self.scraped_link1 = ScrapedLink.objects.create(
-            page=self.scraped_page, url="http://example.com/page1", name="Page 1"
+            page=self.scraped_page,
+            url=SCRAPED_LINK_DATA["url"],
+            name=SCRAPED_LINK_DATA["name"]
         )
         self.scraped_link2 = ScrapedLink.objects.create(
-            page=self.scraped_page, url="http://example.com/page2", name="Page 2"
+            page=self.scraped_page,
+            url="http://koombea.com/page2",
+            name="Page 2"
         )
         self.scraped_link3 = ScrapedLink.objects.create(
-            page=self.scraped_page, url="http://example.com/page3", name="Page 3"
+            page=self.scraped_page,
+            url="http://koombea.com/page3",
+            name="Page 3"
         )
 
     def test_scraped_page_details_view(self):
         scraped_page = ScrapedPage.objects.create(
-            user=self.user, url="http://example.com", name="Example"
+            user=self.user, url="http://koombea.com", name="You App Development Partner"
         )
 
         for i in range(20):
             ScrapedLink.objects.create(
-                page=scraped_page, url=f"http://example.com/link{i}", name=f"Link {i}"
+                page=scraped_page, url=f"http://koombea.com/link{i}", name=f"Link {i}"
             )
 
         response = self.client.get(
@@ -52,43 +82,50 @@ class ScraperTestCase(TestCase):
 
 
 class ScrapedPageModelTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="testuser", password="testpassword"
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            **SCRAPED_PAGE_DATA["user"]
         )
-        self.scraped_page = ScrapedPage.objects.create(
-            user=self.user, url="https://example.com", name="Example"
+        cls.scraped_page = ScrapedPage.objects.create(
+            user=cls.user,
+            url=SCRAPED_PAGE_DATA["url"],
+            name=SCRAPED_PAGE_DATA["name"]
         )
 
     def test_model_fields(self):
-        self.assertEqual(str(self.scraped_page.user), "testuser")
-        self.assertEqual(self.scraped_page.url, "https://example.com")
-        self.assertEqual(self.scraped_page.name, "Example")
+        self.assertEqual(str(self.scraped_page.user), "koombeauser")
+        self.assertEqual(self.scraped_page.url, "https://koombea.com")
+        self.assertEqual(self.scraped_page.name, "You App Development Partner")
         self.assertEqual(self.scraped_page.status, "in_progress")
 
     def test_link_count_property(self):
         scraped_link1 = ScrapedLink.objects.create(
-            page=self.scraped_page, url="https://example.com/link1", name="Link 1"
+            page=self.scraped_page, url="https://koombea.com/link1", name="Link 1"
         )
         scraped_link2 = ScrapedLink.objects.create(
-            page=self.scraped_page, url="https://example.com/link2", name="Link 2"
+            page=self.scraped_page, url="https://koombea.com/link2", name="Link 2"
         )
         self.assertEqual(self.scraped_page.link_count, 2)
 
-
 class ScrapedLinkModelTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="testuser", password="testpassword"
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            **SCRAPED_PAGE_DATA["user"]
         )
-        self.scraped_page = ScrapedPage.objects.create(
-            user=self.user, url="https://example.com", name="Example"
+        cls.scraped_page = ScrapedPage.objects.create(
+            user=cls.user,
+            url=SCRAPED_PAGE_DATA["url"],
+            name=SCRAPED_PAGE_DATA["name"]
         )
-        self.scraped_link = ScrapedLink.objects.create(
-            page=self.scraped_page, url="https://example.com/link1", name="Link 1"
+        cls.scraped_link = ScrapedLink.objects.create(
+            page=cls.scraped_page,
+            url=SCRAPED_LINK_DATA["url"],
+            name=SCRAPED_LINK_DATA["name"]
         )
 
     def test_model_fields_links(self):
-        self.assertEqual(str(self.scraped_link.page), "Example")
-        self.assertEqual(self.scraped_link.url, "https://example.com/link1")
+        self.assertEqual(str(self.scraped_link.page), "You App Development Partner")
+        self.assertEqual(self.scraped_link.url, "https://koombea.com/link1")
         self.assertEqual(self.scraped_link.name, "Link 1")
