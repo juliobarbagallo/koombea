@@ -1,5 +1,7 @@
 from django.core.paginator import Paginator
+from django.shortcuts import render
 
+from scraper.models import ScrapedPage
 from scraper.tasks import scrap
 
 
