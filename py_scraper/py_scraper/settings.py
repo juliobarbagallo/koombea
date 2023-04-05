@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,9 +88,9 @@ DATABASES = {
 }
 
 
-# CELERY_BROKER_URL = 'redis://redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512/0'
-CELERY_BROKER_URL = "redis://:zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN@redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512"
-CELERY_RESULT_BACKEND = "redis://:zFQ2WCO8QHJwQmYFhjeRiNr9UAsNisgN@redis-14512.c266.us-east-1-3.ec2.cloud.redislabs.com:14512"
+
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_SERIALIZER = "json"
