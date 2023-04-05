@@ -68,7 +68,7 @@ python manage.py runserver
 ## Open the browser and navigate to: http://127.0.0.1:8000/ or http://127.0.0.1:8000/accounts/login/
   
 Usage
-Register or login to access the web scraping features You can register a new user or can login using user: koombeauser and password: new14you.
+Register or login to access the web scraping features You can register a new user or can login using **user: koombeauser and password: new14you**.
 Click on "Add Page" to add a web page for scraping by providing the URL of the page.
 Once the page is added, the scraping process will start asynchronously in the background.
 Users can view the list of all the pages they have scraped on the "Pages" page, including the number of links found on each page.
