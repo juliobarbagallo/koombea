@@ -36,4 +36,4 @@ jobs:
         pipenv install --deploy --dev
     - name: Run Tests
       run: |
-        python /py_scraper/manage.py test
+        python ./py_scraper/manage.py test
