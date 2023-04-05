@@ -26,13 +26,13 @@ or directly edit the following line at settings.py file:
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
-Create a new directory for the project.
-Go to your new directory.
-Clone the repository.
-Create a virtual environment and activate it.
-Install the dependencies using pipenv.
-Create a .env file.
-Edit the .env file.
+- Create a new directory for the project.
+- Go to your new directory.
+- Clone the repository.
+- Create a virtual environment and activate it.
+- Install the dependencies using pipenv.
+- Create a .env file.
+- Edit the .env file.
   
 Open a new terminal.
 Got to the project direcotry.
