@@ -88,7 +88,6 @@ DATABASES = {
 }
 
 
-
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 CELERY_ACCEPT_CONTENT = ["application/json"]
@@ -130,7 +129,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+STATICFILES_DIRS = [os.path.join(PROJECT_PATH, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -139,6 +140,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/accounts/dashboard/"
 LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 LOGGING = {
     "version": 1,
